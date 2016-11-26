@@ -1,8 +1,14 @@
 from django.shortcuts import render
+from django.http import HttpResponse
+
+from cms.models import Domain
 
 # Create your views here.
 def domain_list(request):
-	return HttpResponse('Domain List')
+	domains = Domain.objects.all().order_by('id')
+	return render(request,
+					'cms/domain_list.html',
+					{'domains': domains})
 
 def domain_edit(request, domain_id=None):
 	return HttpResponse('Edit Domain')

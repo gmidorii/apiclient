@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}ドメイン一覧{% endblock title %}
+
+{% block extrahead %}
+<style>
+table {
+  margin-top: 8px;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+    <h3 class="page-header">変換ドメインの一覧</h3>
+    <a href="{% url 'cms:domain_add' %}" class="btn btn-default btn-sm">追加</a>
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>ドメイン名</th>
+          <th>IPアドレス</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for domain in domains %}
+        <tr>
+          <td>{{ domain.id }}</td>
+          <td>{{ domain.name }}</td>
+          <td>{{ domain.ip }}</td>
+          <td>
+            <a href="{% url 'cms:domain_mod' domain_id=domain.id %}" class="btn btn-default btn-sm">修正</a>
+            <a href="{% url 'cms:domain_del' domain_id=domain.id %}" class="btn btn-default btn-sm">削除</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+{% endblock content %}
