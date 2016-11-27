@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load bootstrap %}
+
+{% block title %}ドメインの編集{% endblock title %}
+
+{% block content %}
+    <h3 class="page-header">書籍の編集</h3>
+    {% if domain_id %}
+    <form action="{% url 'cms:domain_mod' domain_id=domain_id %}" method="post" class="form-horizontal" role="form">
+    {% else %}
+    <form action="{% url 'cms:domain_add' %}" method="post" class="form-horizontal" role="form">
+    {% endif %}
+      {% csrf_token %}
+      <!-- formで送られてきた内容を展開 -->
+      {{ form|bootstrap_horizontal }}
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button type="submit" class="btn btn-primary">送信</button>
+        </div>
+      </div>
+    </form>
+    <a href="{% url 'cms:domain_list' %}" class="btn btn-default btn-sm">戻る</a>
+{% endblock content %}

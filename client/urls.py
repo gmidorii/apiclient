@@ -15,8 +15,11 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from client import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^cms/', include('cms.urls', namespace='cms')),
+    url(r'^domain/cms/', include('cms.urls', namespace='cms')),
+    url(r'^domain/$', views.input_url, name='input_url'),
+    url(r'^domain/form/$', views.form_url, name='form_url')
 ]

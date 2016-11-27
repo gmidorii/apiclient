@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}URL入力{% endblock title %}
+
+{% block extrahead %}
+<style>
+table {
+  margin-top: 8px;
+}
+</style>
+<script>
+$(function() {
+  $("#base_url").change(function() {
+      var url = $(this).val();
+      console.log(url);
+  })
+});
+</script>
+{% endblock %}
+
+{% block content %}
+<h3 class="page-header">URL入力</h3>
+<form action="{% url 'form_url' %}" method="post" class="form-horizontal" role="form">
+  {% csrf_token %}
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-8">
+      <input id="base_url" type="url" name="access_url"/>
+    </div>
+  <!-- </div>
+  <div class="form-group"> -->
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-primary">送信</button>
+    </div>
+  </div>
+</form>
+{% endblock content %}
