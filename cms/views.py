@@ -3,6 +3,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from cms.models import Domain
 from cms.forms import DomainForm
 
+import csv
+
 # Create your views here.
 def domain_list(request):
 	domains = Domain.objects.all().order_by('id')
@@ -30,4 +32,17 @@ def domain_edit(request, domain_id=None):
 def domain_del(request, domain_id):
 	domain = get_object_or_404(Domain, pk=domain_id)
 	domain.delete()
+	return redirect('cms:domain_list')
+
+def domain_add_byfile(request):
+	# "domain", "ip"
+	csv_file = request.POST['csv_file']
+	reader = csv.reader(csv_file.strip().splitlines())
+	for row in reader:
+		print(row)
+		domain = Domain()
+		domain.name = row[0]
+		domain.ip = row[1]
+		domain.save()
+
 	return redirect('cms:domain_list')

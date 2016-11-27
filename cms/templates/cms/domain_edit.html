@@ -4,7 +4,7 @@
 {% block title %}ドメインの編集{% endblock title %}
 
 {% block content %}
-    <h3 class="page-header">書籍の編集</h3>
+    <h3 class="page-header">ドメインの編集</h3>
     {% if domain_id %}
     <form action="{% url 'cms:domain_mod' domain_id=domain_id %}" method="post" class="form-horizontal" role="form">
     {% else %}
@@ -20,4 +20,16 @@
       </div>
     </form>
     <a href="{% url 'cms:domain_list' %}" class="btn btn-default btn-sm">戻る</a>
+    <h3>ドメインをcsvで追加</h3>
+    <form action="{% url 'cms:domain_add_byfile' %}" method="post" class="form-horizontal" role="form">
+      {% csrf_token %}
+      <div class="form-group">
+        <div class="col-sm-10">
+          <textarea type="text" placeholder='"google.com", "127.0.0.1"' name="csv_file" cols="100" rows="15"></textarea>
+        </div>
+      </div>
+      <div>
+        <button type="submit" class="btn">送信</button>
+      </div>
+    </form>
 {% endblock content %}

@@ -7,19 +7,19 @@ def input_url(request):
     return render(request, 'client/input_url.html')
 
 def form_url(request):
-    parse_url = urllib.parse.urlparse(request.POST['access_url'])
-    # query = parse.parse_qs(parse_url.query)
+    url = request.POST['access_url']
+    parse_url = urllib.parse.urlparse(url)
 
     domains = Domain.objects.all()
     parsed_ip = ""
     for domain in domains:
         if(parse_url.netloc == domain.name):
-            # parse_url.netloc = domain.name
             parsed_ip = domain.ip
+            break
 
-    url = request.POST['access_url']
     if len(parsed_ip) != 0:
         url = "http://" + parsed_ip + parse_url.path + "?" + parse_url.query
+        # request url
         print(url)
 
     json = "{'eroor' : '404' }"
