@@ -10,9 +10,15 @@ table {
 </style>
 <script>
 $(function() {
-  $("#base_url").change(function() {
+  $("#base_url").keyup(function() {
+      $("#query").empty()
       var url = $(this).val();
-      console.log(url);
+      var queries = url.split('?')[1].split('&');
+      for(var query of queries) {
+        param = query.split('=')[0];
+        val = query.split('=')[1];
+        $("#query").append('<div><label>' + param + '</label><input type=text value="' + val + '"/></div></br>');
+      }
   })
 });
 </script>
@@ -33,4 +39,6 @@ $(function() {
     </div>
   </div>
 </form>
+<div id="query">
+</div>
 {% endblock content %}
