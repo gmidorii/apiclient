@@ -7,3 +7,10 @@ class Domain(models.Model):
 
 	def __str__(self):
 		return self.name
+
+class ConvertParam(models.Model):
+	param = models.CharField('param', max_length=255)
+	value = models.CharField('value', max_length=255)
+
+	def __str__(self):
+		return self.param;

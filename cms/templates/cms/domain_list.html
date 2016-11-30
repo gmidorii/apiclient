@@ -36,4 +36,29 @@ table {
         {% endfor %}
       </tbody>
     </table>
+    <h3 class="page-header">変換パラメータ一覧</h3>
+    <a href="{% url 'cms:param_add' %}" class="btn btn-default btn-sm">追加</a>
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>パラメータ名</th>
+          <th>Value</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for param in params %}
+        <tr>
+          <td>{{ param.id }}</td>
+          <td>{{ param.param }}</td>
+          <td>{{ param.value }}</td>
+          <td>
+            <a href="{% url 'cms:param_mod' param_id=param.id %}" class="btn btn-default btn-sm">修正</a>
+            <a href="{% url 'cms:param_del' param_id=param.id %}" class="btn btn-default btn-sm">削除</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
 {% endblock content %}

@@ -7,4 +7,7 @@ urlpatterns = [
 	url(r'^domain/mod/(?P<domain_id>\d+)/$', views.domain_edit, name='domain_mod'),
 	url(r'^domain/del/(?P<domain_id>\d+)/$', views.domain_del, name='domain_del'),
 	url(r'^domain/add/file$', views.domain_add_byfile, name='domain_add_byfile'),
+	url(r'^param/add/$', views.param_edit, name='param_add'),
+	url(r'^param/mod/(?P<param_id>\d+)/$', views.param_edit, name='param_mod'),
+	url(r'^param/del/(?P<param_id>\d+)/$', views.param_del, name='param_del'),
 ]
