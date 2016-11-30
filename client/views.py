@@ -30,7 +30,12 @@ def form_url(request):
     for key in parsed_params.keys():
         query_map[key] = parsed_params[key][0]
 
-    url = "http://" + parsed_ip + parse_url.path + "?" + parse.urlencode(query_map)
+    url = parse.urlunparse((parse_url[0],
+                            parsed_ip,
+                            parse_url[2],
+                            parse_url[3],
+                            parse.urlencode(query_map),
+                            parse_url[5]))
 
     json = url + "\n"
     print("[DEBUG]:" + json)
