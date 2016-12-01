@@ -10,6 +10,6 @@ admin.site.register(Domain, DomainAdmin)
 
 
 class ConvertParamAdmin(admin.ModelAdmin):
-	list_display = ('id', 'param', 'value',)
-	list_display_links = ('id', 'param', 'value',)
+	list_display = ('id', 'key', 'value',)
+	list_display_links = ('id', 'key', 'value',)
 admin.site.register(ConvertParam, ConvertParamAdmin)

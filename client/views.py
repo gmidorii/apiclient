@@ -8,8 +8,7 @@ def input_url(request):
     return render(request, 'client/input_url.html')
 
 def form_url(request):
-    url = request.POST['access_url']
-    parse_url = parse.urlparse(url)
+    parse_url = parse.urlparse(request.POST['access_url'])
 
     domains = Domain.objects.all()
     parsed_ip = parse_url.netloc
@@ -18,13 +17,13 @@ def form_url(request):
             parsed_ip = domain.ip
             break
 
-    params = ConvertParam.objects.all()
+    convert_params = ConvertParam.objects.all()
     parsed_params = parse.parse_qs(parse_url.query)
-    for param in params:
-        if len(parsed_params[param.param]) != 0:
-            # パラメータ重複に未対応
-            del parsed_params[param.param][:]
-            parsed_params[param.param].append(param.value)
+    for convert_param in convert_params:
+        if convert_param.key in parsed_params:
+            # initialize
+            del parsed_params[convert_param.key][:]
+            parsed_params[convert_param.key].append(convert_param.value)
 
     query_map = dict()
     for key in parsed_params.keys():

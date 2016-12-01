@@ -51,7 +51,7 @@ table {
         {% for param in params %}
         <tr>
           <td>{{ param.id }}</td>
-          <td>{{ param.param }}</td>
+          <td>{{ param.key }}</td>
           <td>{{ param.value }}</td>
           <td>
             <a href="{% url 'cms:param_mod' param_id=param.id %}" class="btn btn-default btn-sm">修正</a>

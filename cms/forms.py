@@ -10,4 +10,4 @@ class DomainForm(ModelForm):
 class ConvertParamForm(ModelForm):
     class Meta:
         model = ConvertParam
-        fields = ('param', 'value', )
+        fields = ('key', 'value', )

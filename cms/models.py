@@ -9,8 +9,8 @@ class Domain(models.Model):
 		return self.name
 
 class ConvertParam(models.Model):
-	param = models.CharField('param', max_length=255)
+	key = models.CharField('key', max_length=255)
 	value = models.CharField('value', max_length=255)
 
 	def __str__(self):
-		return self.param;
+		return self.key;
