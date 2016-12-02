@@ -3,6 +3,7 @@ from django.http import HttpResponse
 import urllib
 from urllib import parse,request
 from cms.models import Domain,ConvertParam
+from urllib.error import URLError
 
 def input_url(request):
     return render(request, 'client/input_url.html')
@@ -13,7 +14,7 @@ def form_url(request):
     domains = Domain.objects.all()
     parsed_ip = parse_url.netloc
     for domain in domains:
-        if(parsed_ip == domain.name):
+        if parsed_ip.find(domain.name) != -1 :
             parsed_ip = domain.ip
             break
 
@@ -38,7 +39,10 @@ def form_url(request):
 
     json = url + "\n"
     print("[DEBUG]:" + json)
-    with urllib.request.urlopen(url) as res:
-        json += res.read().decode("utf-8")
+    try:
+        resutlt = urllib.request.urlopen(url)
+        json += result.read().decode("utf-8")
+    except URLError as e:
+        json += "{'error': '接続できませんでした'}"
 
     return HttpResponse(json, content_type='application/json; charset=UTF-8')
