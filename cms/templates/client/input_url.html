@@ -32,7 +32,7 @@ $(function() {
 
 {% block content %}
 <h3 class="page-header">URL入力</h3>
-<form action="{% url 'form_url' %}" method="post" class="form-horizontal" role="form">
+<form action="{% url 'form_url' %}" method="post" class="form-horizontal" role="form" target="_blank">
   {% csrf_token %}
   <div class="form-group">
     <div class="col-sm-10">
@@ -47,5 +47,5 @@ $(function() {
 </form>
 <div id="query">
 </div>
-<a href="{% url 'cms:domain_list' %}">Table</a>
+<a href="{% url 'cms:domain_list' %}" target="_blank">Table</a>
 {% endblock content %}

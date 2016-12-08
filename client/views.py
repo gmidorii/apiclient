@@ -40,7 +40,7 @@ def form_url(request):
     json = url + "\n"
     print("[DEBUG]:" + json)
     try:
-        resutlt = urllib.request.urlopen(url)
+        result = urllib.request.urlopen(url)
         json += result.read().decode("utf-8")
     except URLError as e:
         json += "{'error': '接続できませんでした'}"
